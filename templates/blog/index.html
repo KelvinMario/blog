@@ -1,48 +1,130 @@
-{% extends 'base.html' %}
-{% block main %}
-                {% for post in post_list %}
-                <article class="post post-{{ post.pk }}">
-                    <header class="entry-header">
-                        <h1 class="entry-title">
-                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                        </h1>
-                        <div class="entry-meta">
-                            <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
-                            <span class="post-date"><a href="#"><time class="entry-date"
-                                                                      datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
-                            <span class="post-author"><a href="#">{{ post.author }}</a></span>
-                            <span class="comments-link"><a href="#">4 评论</a></span>
-                            <span class="views-count"><a href="#">588 阅读</a></span>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ke1vin7's Blog</title>
+
+		<!-- meta -->
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- icon -->
+        <link rel="icon" href="{% static 'blog/img/favicon.ico' %}" type="image/x-icon">
+	    <!-- css -->
+		<link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+	    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+
+	    <!-- js -->
+	    <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+	    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+	    <script src="{% static 'blog/js/pace.min.js' %}"></script>
+	    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<header id="site-header-home">
+				<div class="row">
+					<div class="col-md-4 col-sm-5 col-xs-8">
+						<div class="logo">
+							<h1><a href="{% url 'blog:index' %}">Ke1vin7</a></h1>
+						</div>
+					</div><!-- col-md-4 -->
+					<div class="col-md-8 col-sm-7 col-xs-4">
+						<nav class="main-nav" role="navigation">
+							<div class="navbar-header">
+  								<button type="button" id="trigger-overlay" class="navbar-toggle">
+    								<span class="ion-navicon"></span>
+  								</button>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  								<ul class="nav navbar-nav navbar-right">
+    								<li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'blog:blog' %}" data-hover="博客">博客</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'blog:about' %}" data-hover="关于">关于</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'blog:contact' %}" data-hover="联系">联系</a></li>
+  								</ul>
+							</div><!-- /.navbar-collapse -->
+						</nav>
+						<div id="header-search-box">
+							<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+							<div id="search-form" class="search-form">
+								<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+									<input type="search" name="q" placeholder="搜索" required>
+									<button type="submit"><span class="ion-ios-search-strong"></span></button>
+								</form>
+							</div>
+						</div>
+					</div><!-- col-md-8 -->
+				</div>
+			</header>
+		</div>
+
+		<div class="">
+
+
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- 轮播（Carousel）指标 -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="{% static 'blog/img/01.jpg' %}" alt="First slide">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'blog/img/01.jpg' %}" alt="Second slide">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'blog/img/01.jpg' %}" alt="Third slide">
+                            </div>
                         </div>
-                    </header>
-                    <div class="entry-content clearfix">
-                        <p>{{ post.excerpt }}</p>
-                        <div class="read-more cl-effect-14">
-                            <a href="#" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
-                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="carousel-control left" href="#myCarousel"
+                            data-slide="prev">&lsaquo;
+                        </a>
+                        <a class="carousel-control right" href="#myCarousel"
+                            data-slide="next">&rsaquo;
+                        </a>
                     </div>
-                </article>
-                {% empty %}
-                    <div class="no-post">暂时还没有发布的文章！</div>
-                {% endfor %}
-                <!-- 简单分页效果
-                <div class="pagination-simple">
-                    <a href="#">上一页</a>
-                    <span class="current">第 6 页 / 共 11 页</span>
-                    <a href="#">下一页</a>
-                </div>
-                -->
-                <div class="pagination">
-                    <ul>
-                        <li><a href="">1</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="current"><a href="">6</a></li>
-                        <li><a href="">7</a></li>
-                        <li><a href="">8</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">11</a></li>
-                    </ul>
-                </div>
-{% endblock main %}
+
+
+		</div>
+		<footer id="site-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright">&copy 2018 - Coding By : <a href="https://weibo.com/kk492198009just" target="_blank">Ke1vin7</a>
+                        </p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Mobile Menu -->
+		<div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+			<nav>
+				<ul>
+					<li><a href="{% url 'blog:index' %}">首页</a></li>
+					<li><a href="{% url 'blog:blog' %}">博客</a></li>
+					<li><a href="{% url 'blog:about' %}">关于</a></li>
+					<li><a href="{% url 'blog:contact' %}">联系</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<script src="{% static 'blog/js/script.js' %}"></script>
+        <script>
+            $(function() {
+                $("#myCarousel").carousel('cycle');
+            });
+        </script>
+	</body>
+</html>
