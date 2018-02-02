@@ -1,18 +1,18 @@
 
-{% extends 'base.html' %}
+{% extends 'base-full.html' %}
 {% load staticfiles %}
         {% block main %}
 		<div class="content-body">
 			<div class="container">
 				<div class="row">
-					<main class="col-md-8">
+					<main class="col-md-12">
 						<h1 class="page-title">Contact</h1>
 						<article class="post">
 							<div class="entry-content clearfix">
 								<form action="{% url 'message:send_message' %}" method="post" class="contact-form">
                                     {% csrf_token %}
 									<div class="row">
-										<div class="col-md-6 col-md-offset-4">
+										<div class="col-md-8 col-md-offset-2">
 {#                                            <div class="col-md-4">#}
 {#                                                <label for="{{ form.name.id_for_lable }}" ></label>#}
 {#                                                {{ form.name }}#}

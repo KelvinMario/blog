@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load blog_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,27 +11,38 @@
 
     <!-- icon -->
     <link rel="icon" href="{% static 'blog/img/favicon.ico' %}" type="image/x-icon">
+
     <!-- css -->
-    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/socicon.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+{#    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">#}
 
     <!-- js -->
     <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
     <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'blog/js/pace.min.js' %}"></script>
     <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+    <style>
+        span.highlighted {
+            color: #ff9aa4;
+        }
+        .errorlist {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-<div class="">
-    <header id="site-header-home">
+<div>
+    <header id="site-header">
         <div class="row">
             <div class="col-md-4 col-sm-5 col-xs-8">
                 <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}">Ke1vin7</a></h1>
+                    <h1><a href="{% url 'blog:index' %}"><b>Ke1vin7</b></a></h1>
                 </div>
             </div><!-- col-md-4 -->
             <div class="col-md-8 col-sm-7 col-xs-4">
@@ -47,6 +59,7 @@
                             <li class="cl-effect-11"><a href="{% url 'blog:blog' %}" data-hover="博客">博客</a></li>
                             <li class="cl-effect-11"><a href="{% url 'blog:about' %}" data-hover="关于">关于</a></li>
                             <li class="cl-effect-11"><a href="{% url 'blog:contact' %}" data-hover="联系">联系</a></li>
+{#                            <li class="cl-effect-11"><a href="{% url 'allauth:' %}" data-hover="联系">联系</a></li>#}
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
@@ -63,59 +76,29 @@
         </div>
     </header>
 </div>
-
-<div class="">
-
-
-    <div id="myCarousel" class="carousel slide">
-        <!-- 轮播（Carousel）指标 -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <!-- 轮播（Carousel）项目 -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="{% static 'blog/img/01.jpg' %}" alt="First slide">
-            </div>
-            <div class="item">
-                <img src="{% static 'blog/img/01.jpg' %}" alt="Second slide">
-            </div>
-            <div class="item">
-                <img src="{% static 'blog/img/01.jpg' %}" alt="Third slide">
-            </div>
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                {% block main %}
+                {% endblock main %}
+            </main>
         </div>
-        <!-- 轮播（Carousel）导航 -->
-        <a class="carousel-control left" href="#myCarousel"
-           data-slide="prev">&lsaquo;
-        </a>
-        <a class="carousel-control right" href="#myCarousel"
-           data-slide="next">&rsaquo;
-        </a>
     </div>
-
-
 </div>
 <footer id="site-footer">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <p class="copyright">
-                <ul class="social">
-                    <li class="twitter"><a href="https://www.linkedin.com/in/ke1vin7/" target="_blank"><span
-                            class="socicon-linkedin"></span></a></li>
-                    <li class="twitter"><a href="https://twitter.com/KK_Kmaro" target="_blank"><span
-                            class="socicon-twitter"></span></a></li>
-                    <li class="twitter"><a href="https://plus.google.com/u/0/115919268528810291143"
-                                           target="_blank"><span class="socicon-googleplus"></span></a></li>
-                    <li class="twitter"><a href="https://github.com/KelvinMario" target="_blank"><span
-                            class="socicon-github"></span></a></li>
-                    <li class="twitter"><a href="https://weibo.com/kk492198009just" target="_blank"><span
-                            class="socicon-weibo"></span></a></li>
-                </ul>
-                <ul class="social">&copy Copyright - <a href="https://weibo.com/kk492198009just" target="_blank">Ke1vin7</a>
-                    - 粤ICP备17071205号-1</ul>
+                    <ul class="social">
+                        <li class="twitter"><a href="https://www.linkedin.com/in/ke1vin7/" target="_blank"><span class="socicon-linkedin"></span></a></li>
+                        <li class="twitter"><a href="https://twitter.com/KK_Kmaro" target="_blank"><span class="socicon-twitter"></span></a></li>
+                        <li class="twitter"><a href="https://plus.google.com/u/0/115919268528810291143" target="_blank"><span class="socicon-googleplus"></span></a></li>
+                        <li class="twitter"><a href="https://github.com/KelvinMario" target="_blank"><span class="socicon-github"></span></a></li>
+                        <li class="twitter"><a href="https://weibo.com/kk492198009just" target="_blank"><span class="socicon-weibo"></span></a></li>
+                    </ul>
+                    <ul class="social">&copy Copyright - <a href="https://weibo.com/kk492198009just" target="_blank">Ke1vin7</a> - 粤ICP备17071205号-1</ul>
                 </p>
             </div>
         </div>
@@ -136,10 +119,6 @@
 </div>
 
 <script src="{% static 'blog/js/script.js' %}"></script>
-<script>
-    $(function () {
-        $("#myCarousel").carousel('cycle');
-    });
-</script>
+
 </body>
 </html>
